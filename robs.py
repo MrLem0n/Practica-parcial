@@ -30,14 +30,16 @@ class Robots:
     
     def __init__(self, nombre, defensa, ataque, agilidad, vida, lugar_origen,habilidad_especial ,contador=0 ): 
        
-        self.nombre = nombre
-        self.defensa = defensa
-        self.ataque = ataque
-        self.agilidad = agilidad
-        self.vida = vida
-        self.lugar_origen = lugar_origen
-        self.habilidad_especial = habilidad_especial
-        self.contador = contador
+        self.atributos = {
+            'nombre': nombre,
+            'defensa': defensa,
+            'ataque': ataque,
+            'agilidad': agilidad,
+            'vida': vida,
+            'lugar_origen': lugar_origen,
+            'habilidad_especial': habilidad_especial,
+            'contador': contador
+        }
 
 
     def subir_estat(self, defensa, ataque, agilidad, vida ):
@@ -69,21 +71,25 @@ class Robots:
     
 
     
-    def mostrar_robot(self):
-        print (f"El robot es {self.nombre}, su lugar de origen es {self.lugar_origen}, y la vida es {self.vida} ")
+   
 
 
-Robots_registrados: list[Robots] = []
+Robots_registrados=[]
 
 def registrar_robot():
-    nombre = input("Ingrese el nombre de su robot: ")
-    lugar_origen =input("Ingrese la serie o pelicula de su origen: ")
+    nombre = input("Ingrese el nombre del robot: ")
+    defensa = int(input("Ingrese la defensa del robot: "))
+    ataque = int(input("Ingrese el ataque del robot: "))
+    agilidad = int(input("Ingrese la agilidad del robot: "))
+    vida=100
+    lugar_origen = input("Ingrese el lugar de origen del robot: ")
     habilidad_especial = input("Ingrese la habilidad especial del robot: ")
-    
-    nuevo_robot = Robots(nombre, 0, 0, 0, 100, lugar_origen,habilidad_especial)
+    contador=0
+    nuevo_robot=Robots(nombre,defensa,ataque,agilidad,vida,lugar_origen,habilidad_especial,contador)
     Robots_registrados.append(nuevo_robot)
-    print ("Su robot ha sido registrado correctamente: ")
 
+    
+    
 def batalla(a,b):
 
         while a.vida > 0 and b.vida > 0:
@@ -99,7 +105,7 @@ def batalla(a,b):
             break
 def mostrar_robots():
     for robot in Robots_registrados:
-        robot.mostrar_robot()
+        print(f"Nombre: {robot.atributos['nombre']}, Lugar de origen: {robot.atributos['lugar_origen']}")
 
     
 
@@ -120,7 +126,7 @@ def menu():
         elif opcion == '1':
             registrar_robot()
         elif opcion == '2':
-            mostrar_robots
+            mostrar_robots()
         elif opcion == '3':
             if Robots_registrados:
                 print(f"Elija que robots desea que peleen: {mostrar_robots()}")
@@ -137,6 +143,3 @@ def menu():
 
 
 menu()
-
-
-        
