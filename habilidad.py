@@ -2,15 +2,13 @@ class Habilidad:
     def __init__(self, nombre, nivel):
         self.nombre = nombre
         self.nivel = nivel
+def __repr__(self):
+        return f"{self.nombre} (Nivel {self.nivel})"
 
-    def agregarHabilidad(self,nombre,nivel=1):
-        nombre = input("nombre de la habilidad")
-        habilidad = Habilidad(nombre, nivel)
-        habilidades.append(habilidad)
-        print("habilidad agregada con exito!")
-    def mejorar(self):
-        self.nivel +=1
-        print(f"Habilidad '{self.nombre}' mejorada a nivel {self.nivel}. ")
-
-habilidades=[]
+habilidades=[
+    Habilidad("Impactrueno", 1),
+    Habilidad("Golpe", 1),
+    Habilidad("Puñal", 1),
+    Habilidad("Romper", 1)
+]
 

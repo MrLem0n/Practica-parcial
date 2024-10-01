@@ -1,6 +1,4 @@
-from habilidad import Habilidad
-from q import enqueue
-from batalla import pelea
+from habilidad import habilidades
 import random
 class Robots:
     
@@ -10,22 +8,19 @@ class Robots:
             'nombre': nombre,
             'defensa': defensa,
             'ataque': ataque,
-           
             'vida': vida,
             'lugar_origen': lugar_origen,
-            
-            'contador': contador
+            'contador': contador,
+            'habilidades': {
+                habilidad.nombre: habilidad.nivel for habilidad in habilidades
+            }
+
         }
 
     def __str__(self):
         return f"Robot(nombre={self.atributos['nombre']}, lugar_origen={self.atributos['lugar_origen']})"
 
 
-    def subir_estat(self, defensa, ataque, agilidad, vida ):
-        self.defensa = self.defensa + defensa
-        self.ataque = self.ataque + ataque
-        self.agilidad = self.agilidad + agilidad
-        self.vida = self.vida + vida
 
     def vive(self):
         return self.vida >0
@@ -42,11 +37,26 @@ class Robots:
         return self.fuerza - enemigo.defensa
     
 
-    
-    
+colaRep=[]
 
+
+def enqueue(robot):
+    if robot.atributos['vida']==0:
+        colaRep.append(robot)
+        print(f"Robot {robot.atributos['nombre']} añadido a la cola")
     
-   
+def pelea(a,b):
+    while a['vida'] > 0 and b['vida'] > 0:
+        a.atacar(b)
+        if b.atributos['vida'] <= 0:
+            print(f"El ganador es: {a['nombre']}")
+            enqueue(b)
+            break
+        b.atacar(a)
+        print(f"{a['vida']}, {b['vida']}")
+        if a.vida <= 0:
+            print(f"El ganador es: {b['nombre']}")
+            enqueue(a)
 
 
 Robots_registrados=[]
